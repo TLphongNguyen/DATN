@@ -21,7 +21,6 @@ const OrdersPage = () => {
 		try {
 			const response = await shopServices.getOrderListByShopId(shop?.shopId);
 			setOrders(response.data);
-			console.log(response.data);
 		} catch (error) {
 			console.error('Error fetching orders:', error);
 		}

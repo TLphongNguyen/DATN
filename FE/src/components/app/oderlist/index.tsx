@@ -5,10 +5,14 @@ import { useRouter } from 'next/navigation';
 import { formatDistanceToNow } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import Image from 'next/image';
+import { Pagination } from 'antd';
+import { useState } from 'react';
 
 const OderList = ({ orderList }: any) => {
-	console.log('orderList', orderList);
 	const router = useRouter();
+	const [currentPage, setCurrentPage] = useState(1);
+	const pageSize = 5;
+
 	const viewShop = (shopId: number) => {
 		router.push(`/shop-infor/${shopId}`);
 	};
@@ -16,9 +20,15 @@ const OderList = ({ orderList }: any) => {
 		router.push(`/productdetail/${productId}`);
 	};
 
+	const paginatedOrders = orderList.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
+	};
+
 	return (
 		<div className="space-y-4">
-			{orderList.map((order: any, index: number) => (
+			{paginatedOrders.map((order: any, index: number) => (
 				<div key={index} className="bg-white p-4 rounded-lg shadow">
 					{/* Order Header */}
 					<div className="flex justify-between items-center border-b pb-3 mb-3">
@@ -55,9 +65,9 @@ const OderList = ({ orderList }: any) => {
 							<div className="flex-1">
 								<p className="font-medium mb-1">{item.ProductVariant.Products.productName}</p>
 								<p className="text-sm text-gray-600">
-									Variation: {item.ProductVariant.VariantValue.typeValue}
+									chi tiết sản phẩm: {item.ProductVariant.VariantValue.typeValue}
 								</p>
-								<p className="text-sm text-gray-600">x{item.quantity}</p>
+								<p className="text-sm text-gray-600">số lượng : x{item.quantity}</p>
 							</div>
 							<div className="text-right">
 								{item.totalPrice && (
@@ -108,6 +118,17 @@ const OderList = ({ orderList }: any) => {
 					</div>
 				</div>
 			))}
+
+			{/* Pagination */}
+			<div className="flex justify-center mt-6">
+				<Pagination
+					current={currentPage}
+					total={orderList.length}
+					pageSize={pageSize}
+					onChange={handlePageChange}
+					showSizeChanger={false}
+				/>
+			</div>
 		</div>
 	);
 };

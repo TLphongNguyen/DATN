@@ -16,7 +16,9 @@ const HeaderSearch = ({ setIsSearchFocused, onSearchChange }: Props) => {
 	const router = useRouter();
 
 	const onSubmit = async () => {
-		router.push(`/search?q=${dataValue}`);
+		if (dataValue !== '') {
+			router.push(`/search?q=${dataValue}`);
+		}
 	};
 
 	return (

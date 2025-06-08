@@ -45,6 +45,9 @@ const customerServices = {
   getBillByCustomerId: async (customerId: number) => {
     const bill = await Prismaclient.bill.findMany({
       where: { customerId },
+      orderBy: {
+        createAt: "desc",
+      },
       include: {
         BillDetail: {
           include: {

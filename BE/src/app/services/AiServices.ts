@@ -8,6 +8,9 @@ const chain = createGeminiChain();
 const searchCache = new Map<string, any>();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
+// Get base URL from environment variable or use default
+const BASE_URL = "http://localhost:3000";
+
 const AiServices = {
   chat: async (message: string) => {
     try {
@@ -48,7 +51,7 @@ const AiServices = {
       if (products.length > 0) {
         const productContext = products
           .map((p, i) => {
-            const productLink = `http://localhost:3000/productdetail/${p.productId}`;
+            const productLink = `${BASE_URL}/productdetail/${p.productId}`;
             return `${i + 1}. [${p.productName}](${productLink})\n${
               p.productDes
             }\nGiá: ${p.price}đ\nDanh mục: ${

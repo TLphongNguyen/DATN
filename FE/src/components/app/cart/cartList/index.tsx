@@ -22,7 +22,6 @@ type CartItemType = {
 	isSelected: boolean;
 };
 const CartList = () => {
-	// const [quantity, setQuantity] = useState(0);
 	const dispatch = useDispatch();
 	const [selectedItems, setSelectedItems] = useState<CartItemType[]>([]);
 	const cart = useSelector((state: RootState) => state.cart.cart);
@@ -48,9 +47,6 @@ const CartList = () => {
 		} else {
 			setSelectedItems([]);
 		}
-	};
-	const handleDelete = () => {
-		console.log('Delete selected items');
 	};
 
 	const handleSelect = (item: CartItemType) => {
@@ -88,7 +84,7 @@ const CartList = () => {
 					<span className="">Đơn giá</span>
 					<span className="">Số lượng</span>
 					<span className="">Thành tiền</span>
-					<button onClick={handleDelete}>
+					<button>
 						<FaRegTrashCan />
 					</button>
 				</header>
@@ -104,6 +100,7 @@ const CartList = () => {
 								quantities={item.quantity}
 								price={item.ProductVariant.price}
 								variantValue={item.typeValue}
+								productId={item.productId}
 								onSelect={handleSelect}
 								isSelected={selectedItems.some((selected) => selected.id === item.id)}
 							/>

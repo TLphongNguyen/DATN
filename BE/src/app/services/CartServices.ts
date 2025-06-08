@@ -34,6 +34,7 @@ const CartService = {
         return {
           ...item,
           ...item.ProductVariant.VariantValue,
+          productId: item.ProductVariant.productId,
           productName: product?.productName,
           price: product?.price,
           image: product?.img,

@@ -5,6 +5,7 @@ import { FaRegTrashCan } from 'react-icons/fa6';
 import { formatPrice } from '@/utils/formatprice';
 import { deleteCart } from '@/reducers/slice/cartSlice';
 import { useDispatch } from 'react-redux';
+import Link from 'next/link';
 import CartServices from '@/services/CartServices/CartServices';
 import { URL_SERVICE } from '@/constant/constant';
 
@@ -16,6 +17,7 @@ type Props = {
 	price: number;
 	variantValue: string;
 	cartId: number;
+	productId: number;
 	isSelected: boolean;
 	onSelect?: (item: {
 		id: number;
@@ -30,7 +32,7 @@ type Props = {
 	}) => void;
 };
 
-const CartItem = ({ id, img, name, quantities, price, variantValue, cartId, onSelect }: Props) => {
+const CartItem = ({ id, img, name, quantities, price, variantValue, productId, cartId, onSelect }: Props) => {
 	const [quantity, setQuantity] = useState<number>(quantities);
 	const [totalPrice, setTotalPrice] = useState<number>(price * quantities);
 	const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -119,12 +121,14 @@ const CartItem = ({ id, img, name, quantities, price, variantValue, cartId, onSe
 					<div className=" w-[80px] h-[80px]">
 						<img src={img} alt="" className="w-full h-full object-contain" />
 					</div>
-					<div className="cart-item__details ">
-						<h3 className="text-[14px] leading-[150%] text-[#27272a] line-clamp-2 hover:text-[#0b74e5]">
-							{name}
-						</h3>
-						<p className="cart-item__description">{variantValue}</p>
-					</div>
+					<Link href={`/productdetail/${productId}`}>
+						<div className="cart-item__details ">
+							<h3 className="text-[14px] leading-[150%] text-[#27272a] line-clamp-2 hover:text-[#0b74e5]">
+								{name}
+							</h3>
+							<p className="cart-item__description">{variantValue}</p>
+						</div>
+					</Link>
 				</div>
 			</div>
 			<div className="cart-item__unit-price">

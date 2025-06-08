@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
 			'firebasestorage.googleapis.com',
 			'sgvkftuhdvhqhkxjxbon.supabase.co',
 			'jpesrdrgrcqjeqavqxrj.supabase.co',
+			'zbibrtzipjlnmgotkxzq.supabase.co',
 			'frontend.tikicdn.com',
 			'salt.tikicdn.com',
 			'images.remotePatterns',

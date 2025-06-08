@@ -33,10 +33,8 @@ export default function ChatPage() {
 	const servicesChat = new ServicesChat(URL_SERVICE || '', () => {});
 	const shop = useSelector((state: RootState) => state.shop.shopInfo);
 
-	// Join chat room when selecting a customer
 	useEffect(() => {
 		if (selectedCustomer?.customerId && shop?.shopId) {
-			// Leave previous room if exists
 			if (selectedCustomer.customerId) {
 				socket.emit('leave_chat', {
 					customerId: selectedCustomer.customerId,
